@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Fundamentals Documentation</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <nav id="navbar">
+        <header>React Fundamentals</header>
+
+        <ul>
+            <li><a class="nav-link" href="#introduction">React is all about components</a></li>
+            <li><a class="nav-link" href="#what-the-flux-is-jsx">What the flux is JSX?</a></li>
+            <li><a class="nav-link" href="#jsx-expresion-anywhere">You can use JavaScript expressions anywhere in JSX</a></li>
+            <li><a class="nav-link" href="#write-react-components-with-js">You can write React components with JavaScript classes.</a></li>
+            <li><a class="nav-link" href="#events-in-react">Events in React: Two Important Differences</a></li>
+        </ul>
+    </nav>
+
+    <main id="main-doc">
+        <section id="introduction" class="main-section">
+            <header>React is all about components</header>
+            <article>
+                <p>
+                    React is designed around the concept of reusable components. You define small components and you put them together to form bigger components.
+                </p>
+                <p>All components small or big are reusable, even across different projects.</p>
+                <p>A React component — in its simplest form — is a plain-old JavaScript function:</p>
+                <pre>
+                    <code>
+                        // Example 1
+                        // https://jscomplete.com/repl?j=Sy3QAdKHW
+                        function Button (props) {
+                        // Returns a DOM element here. For example:
+                        return &lt;button type="submit"&gt;{props.label}&lt;/button&gt;;
+                        }
+                        // To render the Button component to the browser
+                        ReactDOM.render(&lt;Button label="Save" /&gt;, mountNode)
+                    </code>
+                </pre>
+                <p>
+                    The curly braces used for the button label are explained below. Don’t worry about them now. ReactDOM will also be explained later, but if you want to test this example and all upcoming code examples, the above render function is what you need.
+                </p>
+            </article>
+        </section>
+
+        <section id="what-the-flux-is-jsx" class="main-section">
+            <header>What the flux is JSX?</header>
+            <article>
+                <p>
+                    Example 1 above can be written in pure React.js without JSX as follows:
+                </p>
+                <pre>
+                    <code>
+                        // Example 2 -  React component without JSX
+                        // https://jscomplete.com/repl?j=HyiEwoYB-
+                        function Button (props) {
+                        return React.createElement(
+                            "button",
+                            { type: "submit" },
+                            props.label
+                        );
+                        }
+                        // To use Button, you would do something like
+                        ReactDOM.render(
+                        React.createElement(Button, { label: "Save" }),
+                        mountNode
+                        );
+                    </code>
+                </pre>
+                <p>
+                    The createElement function is the main function in the React top-level API. It’s 1 of a total of 8 things in that level that you need to learn. That’s how small the React API is.
+                </p>
+                <p>
+                    Much like the DOM itself having a document.createElement function to create an element specified by a tag name, React’s createElement function is a higher-level function that can do what document.createElement does, but it can also be used to create an element to represent a React component. We did the latter when we used the Button component in Example 2 above.
+                </p>
+                <p>
+                    Unlike document.createElement, React’s createElement accepts a dynamic number of arguments after the second one to represent the children of the created element. So createElement actually creates a tree.
+                </p>
+                <p>Here’s an example of that:</p>
+                <pre>
+                    <code>
+                        // Example 3 -  React’s createElement API
+                        // https://jscomplete.com/repl?j=r1GNoiFBb
+                        const InputForm = React.createElement(
+                        "form",
+                        { target: "_blank", action: "https://google.com/search" },
+                        React.createElement("div", null, "Enter input and click Search"),
+                        React.createElement("input", { name: "q", className: "input" }),
+                        React.createElement(Button, { label: "Search" })
+                        );
+                        // InputForm uses the Button component, so we need that too:
+                        function Button (props) {
+                        return React.createElement(
+                            "button",
+                            { type: "submit" },
+                            props.label
+                        );
+                        }
+                        // Then we can use InputForm directly with .render
+                        ReactDOM.render(InputForm, mountNode);
+                    </code>
+                </pre>
+                <p>Note a few things about the example above:</p>
+                <ul>
+                    <li>
+                        InputForm is not a React component; it’s just a React element. This is why we used it directly in the ReactDOM.render call and not with &lt;InputForm/ &gt;.
+                    </li>
+                    <li>
+                        The React.createElement function accepted multiple arguments after the first two. Its list of arguments starting from the 3rd one comprises the list of children for the created element.
+                    </li>
+                    <li>
+                        We were able to nest React.createElement calls because it’s all JavaScript.
+                    </li>
+                    <li>
+                        The second argument to React.createElement can be null or an empty object when no attributes or props are needed for the element.
+                    </li>
+                    <li>
+                        We can mix HTML element with React elements.
+                    </li>
+                    <li>
+                        React’s API tries to be as close to the DOM API as possible, that’s why we use className instead of class for the input element. Secretly, we all wish the React’s API would become part of the DOM API itself. Because, you know, it’s much much better.
+                    </li>
+                </ul>
+                <p>
+                    The code above is what the browser understands when you include the React library. The browser does not deal with any JSX business. However, we humans like to see and work with HTML instead of these createElement calls (imagine building a website with just document.createElement, which you can!). This is why the JSX compromise exists. Instead of writing the form above with React.createElement calls, we can write it with a syntax very similar to HTML:
+                </p>
+
+                <pre>
+                    <code>
+                        // Example 4 - JSX (compare with Example 3)
+                        // https://jscomplete.com/repl?j=SJWy3otHW
+                        const InputForm =
+                        &lt;form target="_blank" action="https://google.com/search"&gt;
+                            &lt;div&gt;Enter input and click Search&lt;/div&gt;
+                            &lt;input name="q" className="input"/ &gt;
+                            &lt;Button label="Search"/ &gt;
+                        &lt;/form&gt;;
+                        // InputForm "still" uses the Button component, so we need that too.
+                        // Either JSX or normal form would do
+                        function Button (props) {
+                        // Returns a DOM element here. For example:
+                        return &lt;button type="submit"&gt;{props.label}&lt;/button&gt;;
+                        }
+                        // Then we can use InputForm directly with .render
+                        ReactDOM.render(InputForm, mountNode);
+                    </code>
+                </pre>
+
+                <p>Note a few things about the above:</p>
+
+                <ul>
+                    <li>It’s not HTML. For example, we’re still doing className instead of class.</li>
+                    <li>We’re still considering what looks like HTML above as JavaScript. See how I added a semicolon at the end.</li>
+                </ul>
+
+                <p>What we wrote above (Example 4) is JSX. Yet, what we took to the browser is the compiled version of it (Example 3). To make that happen, we need to use a pre-processor to convert the JSX version into the React.createElement version.</p>
+            </article>
+        </section>
+
+        <section id="jsx-expresion-anywhere" class="main-section">
+            <header>You can use JavaScript expressions anywhere in JSX</header>
+            <article>
+                <p>
+                    Inside a JSX section, you can use any JavaScript expression within a pair of curly braces.
+                </p>
+                <pre>
+                    <code>
+                        // To use it:ReactDOM.render(&lt;RandomValue /&gt;, mountNode);// Example 5 -  Using JavaScript expressions in JSX
+                        // https://jscomplete.com/repl?j=SkNN3oYSW
+                        const RandomValue = () => 
+                        &lt;div&gt;
+                            { Math.floor(Math.random() * 100) }
+                        &lt;/div&gt;;
+                        // To use it:
+                        ReactDOM.render(&lt;RandomValue /&gt;, mountNode);
+                    </code>
+                </pre>
+                <p>
+                    Any JavaScript expression can go inside those curly braces. This is equivalent to the ${} interpolation syntax in JavaScript template literals.
+                </p>
+                <p>
+                    This is the only constraint inside JSX: only expressions. So, for example, you can’t use a regular if statement, but a ternary expression is ok.
+                </p>
+                <p>
+                    JavaScript variables are also expressions, so when the component receives a list of props (the RandomValue component didn’t, props are optional), you can use these props inside curly braces. We did this in the Button component above (Example 1).
+                </p>
+            </article>
+        </section>
+
+        <section id="write-react-components-with-js" class="main-section">
+            <header>You can write React components with JavaScript classes</header>
+            <article>
+                <p>
+                    Simple function components are great for simple needs, but sometimes we need more. React supports creating components through the JavaScript class syntax as well. Here’s the Button component (in Example 1) written with the class syntax:
+                </p>
+                <pre>
+                    <code>
+                        // Example 9 - Creating components using JavaScript classes
+                        // https://jscomplete.com/repl?j=ryjk0iKHb
+                        class Button extends React.Component {
+                        render() {
+                            return &lt;button&gt;{this.props.label}&lt;/button&gt;;
+                        }
+                        }
+                        // Use it (same syntax)
+                        ReactDOM.render(&lt;Button label="Save" /&gt;, mountNode);
+                    </code>
+                </pre>
+                <p>
+                    The class syntax is simple. Define a class that extends React.Component (another top-level React API thing that you need to learn). The class defines a single instance function render(), and that render function returns the virtual DOM element. Every time we use the Button class-based component above (for example, by doing &lt;Button ... / &gt;), React will instantiate an object from this class-based component and use that object to render a DOM element in the DOM tree.
+                </p>
+                <p>
+                    This is the reason why we used this.props.label inside the JSX in the rendered output above. Because every element rendered through a class component gets a special instance property called props that holds all values passed to that element when it was created.
+                </p>
+                <p>Since we have an instance associated with a single use of the component, we can customize that instance as we wish. We can, for example, customize it after it gets constructed by using the regular JavaScript constructor function:
+
+                </p>
+                <pre>
+                    <code>
+                        // Example 10 -  Customizing a component instance
+                        // https://jscomplete.com/repl?j=rko7RsKS-
+                        class Button extends React.Component {
+                        constructor(props) {
+                            super(props);
+                            this.id = Date.now();
+                        }
+                        render() {
+                            return &lt;button id={this.id}&gt;{this.props.label}&lt;/button&gt;;
+                        }
+                        }
+                        // Use it
+                        ReactDOM.render(&lt;Button label="Save"/ &gt;, mountNode);
+                    </code>
+                </pre>
+
+            </article>
+        </section>
+
+        <section id="events-in-react" class="main-section">
+            <header>Events in React: Two Important Differences</header>
+            <article>
+                <p>
+                    When handling events inside React elements, there are two very important differences from the way we do so with the DOM API:
+                </p>
+                <ul>
+                    <li>All React elements attributes (events included) are named using camelCase, rather than lowercase. It’s onClick, not onclick.</li>
+                    <li>We pass an actual JavaScript function reference as the event handler, rather than a string. It’s onClick={handleClick}, not onClick="handleClick".</li>
+                </ul>
+                <p>
+                    React wraps the DOM event object with an object of its own to optimize the performance of events handling. But inside an event handler, we can still access all methods available on the DOM event object. React passes that wrapped event object to every handle call. For example, to prevent a form from the default submission action, you can do:
+                </p>
+                <pre>
+                    <code>
+                        // Example 12 - Working with wrapped events
+                        // https://jscomplete.com/repl?j=HkIhRoKBb
+                        class Form extends React.Component {
+                        handleSubmit = (event) => {
+                            event.preventDefault();
+                            console.log('Form submitted');
+                        };
+                        
+                        render() {
+                            return (
+                            &lt;form onSubmit={this.handleSubmit}&gt;
+                                &lt;button type="submit"&gt;Submit&lt;/button&gt;
+                            &lt;/form&gt;
+                            );
+                        }
+                        }
+                        // Use it
+                        ReactDOM.render(&lt;Form /&gt;, mountNode);
+                    </code>
+                </pre>
+                <p>
+                    The curly braces used for the button label are explained below. Don’t worry about them now. ReactDOM will also be explained later, but if you want to test this example and all upcoming code examples, the above render function is what you need.
+                </p>
+            </article>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Hubballi&display=swap');
+
+:root {
+  --dark-cyan: #006166;
+  --light-cyan: #a8fbff;
+  --semi-light-cyan: #81d0d4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: var(--light-cyan);
+}
+
+h1, h2, h3 {
+  font-family: 'Poppins', sans-serif;
+}
+p {
+  font-family: 'Hubballi', sans-serif;
+  font-size: 1.2rem;
+}
+
+.container {
+  width: 100%;
+  padding: 10px 0;
+  background: var(--dark-cyan);
+  background-image: linear-gradient(
+    115deg,
+    rgba(10, 32, 33, 0.8),
+    rgba(1, 29, 31, 0.7)
+  ), 
+    url(https://images.wallpaperscraft.com/image/single/rocks_coast_sea_262962_1920x1080.jpg);
+  
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.form-container {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+
+/* header styling */
+#header {
+  margin: 30px 0;
+}
+
+#title {
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+#description {
+  color: var(--semi-light-cyan);
+}
+/* end of header styling */
+
+/* form styling */
+form {
+  width: 100%;
+  margin: auto;
+  text-align: left;
+  background: rgba(0, 49, 51, 0.9);
+  padding: 30px;
+  border-radius: 10px;
+}
+
+label {
+  display: block;
+  font-family: Hubballi, sans-serif;
+  font-size: 1.5rem;
+  margin-top: 10px;
+}
+
+.form-control {
+  width: 100%;
+  height: 2em;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  color: var(--dark-cyan);
+}
+
+select.form-control {
+  height: 2.2em;
+  color: var(--dark-cyan)
+}
+select option {
+  color: var(--dark-cyan);
+}
+
+fieldset {
+  padding: 10px;
+  border-radius: 5px;
+}
+legend {
+  font-family: Hubballi, sans-serif;
+  font-size: 1.5rem;
+  padding: 10px;
+}
+
+textarea.form-control {
+  height: 6em;
+}
+
+#submit {
+  color: var(--dark-cyan);
+  background-color: var(--light-cyan);
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  margin: auto;
+}
+/* end of form styling */
+
+@media (min-width: 780px) {
+  form {
+    width: 80%;
+  }
+}
+
+@media(min-width: 1000px) {
+    form {
+        width: 60%;
+    }
+}

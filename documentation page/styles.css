@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+:root {
+    --primary-color: #274f57;
+    --primary-dark-color: #023047;
+    --secondary-color: #84a59d;
+    --background-color: #e5e5e5;
+    --nav-color: #f4ffb4;
+}
+
+html,
+body {
+    min-width: 290px;
+    background-color: var(--background-color);
+    color: var(--primary-dark-color);
+    font-family: Lato, sans-serif;
+}
+
+/* navbar styless */
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 290px;
+    width: 300px;
+    height: 100%;
+    border-right: solid;
+    border-color: var(--secondary-color);
+    background-color: var(--nav-color);
+    color: var(--primary-dark-color);
+}
+
+#navbar > ul {
+    /* list-style: none;
+    padding-left: 0; */
+    height: 88%;
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#navbar > header {
+    margin: 10px;
+    text-align: center;
+    font-size: 1.8em;
+    font-weight: thin;
+}
+
+#navbar > ul > li {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    position: relative;
+    width: 100%;
+}
+
+#navbar > ul > li > a {
+    text-decoration: none;
+    color: var(--secondary-color);
+    display: block;
+    padding: 10px 30px;
+    cursor: pointer;
+}
+
+#navbar > ul > li > a:hover {
+    color: var(--primary-color);
+}
+/* end of navbar styles */
+
+/* main doc styling */
+#main-doc {
+    position: absolute;
+    margin-left: 310px;
+    margin-bottom: 110px;
+    padding: 20px;
+}
+
+#main-doc header {
+    margin-left: 0;
+    text-align: left;
+    font-size: 1.5em;
+}
+
+section article {
+    color: var(--primary-dark-color);
+    margin: 15px;
+    font-size: 0.9em;
+}
+
+section li {
+    margin: 15px 0 0 20px;
+}
+
+code {
+    display: block;
+    text-align: left;
+    white-space: pre-line;
+    position: relative;
+    background: #f7f7f7;
+    padding: 10px;
+    margin: 15px;
+    border-radius: 5px;
+}
+
+section.main-section {
+    border-bottom: 1px solid var(--primary-dark-color);
+    margin-bottom: 20px;
+}
+
+section.main-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+/* end of main doc styling */
+
+/* media queries */
+@media (max-width: 760px) {
+    #navbar ul {
+        height: 207px;
+        border: 1px solid;
+    }
+
+    #navbar {
+        max-height: 275px;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        margin: 0;
+        padding: 0;
+        border: none;
+        z-index: 1;
+        border-bottom: 2px solid;
+    }
+    #main-doc {
+        position: relative;
+        margin-left: 0;
+        margin-top: 270px;
+    }
+}
+/* end of media queries */

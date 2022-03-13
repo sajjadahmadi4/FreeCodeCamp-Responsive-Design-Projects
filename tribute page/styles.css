@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300&display=swap');
+
+body {
+  font-family: 'Fredoka', sans-serif;
+  margin: 0;
+}
+
+main {
+/*   background-color: #0C6291; */
+  background-color: #023047;
+  color: #FBFEF9;
+  padding: 15px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#title {
+  font-size: 3rem;
+  font-family: 'Varela Round', sans-serif;
+}
+
+.subtitle {
+  color: #EFEFEF;
+  font-size: 1.5rem;
+}
+
+#img-div {
+  width: 70vw;
+  margin: auto;
+}
+
+#image {
+  width: 100%;
+  height: auto;
+  margin-top: 15px;
+}
+
+#img-caption {
+  text-align: left;
+}
+
+#tribute-info {
+  width: 60vw;
+  margin: auto;
+}
+
+#headline {
+  text-align: center;
+  font-family: 'Varela Round', sans-serif;
+  font-size: 2rem;
+}
+
+#tribute-info ul li {
+  font-size: 1.4rem;
+  list-style: square;
+  margin: 20px 0;
+}
+
+footer {
+  width: 60vw;
+  margin: auto;
+  text-align: center;
+}
+
+quote {
+  font-size: 1.2rem;
+  font-family: "Varela Round", sans-serif;
+}
+
+#tribute-link{
+  display: inline-block;
+  margin-top: 20px;
+  text-decoration: none;
+  color: #FBFEF9;
+  font-size: 1.1rem;
+  border: 1px solid #FBFEF9;
+  padding: 10px;
+}
+#tribute-link:hover {
+  color: #ee9b00;
+}
